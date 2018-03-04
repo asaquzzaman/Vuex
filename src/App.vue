@@ -1,25 +1,22 @@
 <template>
     <div>
-        <state></state>
-        <getters></getters>
-        <mutations></mutations>
-        <actions></actions>
+        <store></store>
+        <modules></modules>
+        <namespace></namespace>
     </div>
 </template>
 
 <script type="text/javascript">
 
-    import State from '@components/state.vue'
-    import Getters from '@components/getters.vue'
-    import Mutations from '@components/mutations.vue'
-    import Actions from '@components/actions.vue'
+    import Store from '@components/store.vue'
+    import Modules from '@components/modules.vue'
+    import NameSpace from '@components/namespace.vue'
     
     export default {
         components: {
-            'state': State,
-            'getters': Getters,
-            'mutations': Mutations,
-            'actions': Actions
+            'store': Store,
+            'modules': Modules,
+            'namespace': NameSpace
         }
     }
 
