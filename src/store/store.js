@@ -6,34 +6,40 @@ import NameSpace from './storeNS'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+
     state: {
-        user: 'I am store',
+        userName: 'I am state from general',
         
         todos: [
-            { id: 1, text: 'Task 1', done: true },
-            { id: 2, text: 'Task 2', done: false },
-            { id: 3, text: 'Task 3', done: true }
-        ],
+            { id: 1, text: 'A Task 1', status: true },
+            { id: 2, text: 'A Task 2', status: false },
+        ]
     },
 
     getters: {
-        completeTodos: state => {
-            return state.todos.filter(todo => todo.done)
+        withSpreadTodos: state => {
+            return state.todos.filter(todo => todo.status)
+        },
+
+        withoutSpreadTodos: state => {
+            return state.todos.filter(todo => !todo.status)
         }
     },
 
     mutations: {
-        addNewTodo (state, todo) {
+        createTodo (state, todo) {
             state.todos.push(todo);
         }
     },
 
     actions: {
-        addNewTodo (context) {
+        importTodo (context, status) {
             
             import('@helpers/todos.json').then(todos => {
                 todos.forEach( todo => {
-                    context.commit('addNewTodo', todo);
+                    if (todo.status === status) {
+                        context.commit('createTodo', todo);
+                    }
                 });
             });
         }

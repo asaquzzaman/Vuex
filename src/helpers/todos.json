@@ -1,5 +1,4 @@
 [
-	{ "id":"10", "text": "Task 10", "done":true },
-	{ "id":"11", "text": "Task 11", "done":false },
-	{ "id":"12", "text": "Task 12", "done":true }
+	{ "id":"10", "text": "Task from json file", "status":true },
+	{ "id":"20", "text": "Task from json file", "status":false }
 ]

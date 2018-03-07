@@ -1,33 +1,38 @@
 const moduleA = {
 
-	state: {
-        userA: 'I am store A',
+    state: {
+        userName: 'I am state from module',
         
-        todosA: [
-            { id: 1, text: 'A Task 1', done: true },
-            { id: 2, text: 'A Task 2', done: false },
-            { id: 3, text: 'A Task 3', done: false }
+        todos: [
+            { id: 1, text: 'A Task 1', status: true },
+            { id: 2, text: 'A Task 2', status: false },
         ]
     },
 
     getters: {
-        mGCompleteTodosA: state => {
-            return state.todosA.filter(todo => todo.done)
+        aWithSpreadTodos: state => {
+            return state.todos.filter(todo => todo.status)
+        },
+
+        aWithoutSpreadTodos: state => {
+            return state.todos.filter(todo => !todo.status)
         }
     },
 
     mutations: {
-        mMCreateTodoA (state, todo) {
-            state.todosA.push(todo);
+        aCreateTodo (state, todo) {
+            state.todos.push(todo);
         }
     },
 
     actions: {
-        mACreateTodoA (context) {
-        	
+        aImportTodo (context, status) {
+            
             import('@helpers/todos.json').then(todos => {
                 todos.forEach( todo => {
-                    context.commit('mMCreateTodoA', todo);
+                    if (todo.status === status) {
+                        context.commit('aCreateTodo', todo);
+                    }
                 });
             });
         }

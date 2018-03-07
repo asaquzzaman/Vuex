@@ -3,33 +3,38 @@ const moduleNS = {
     namespaced: true,
 
 	state: {
-        userA: 'I am store A',
+        userName: 'I am state from namespace',
         
-        todosA: [
-            { id: 1, text: 'A Task 1', done: true },
-            { id: 2, text: 'A Task 2', done: false },
-            { id: 3, text: 'A Task 3', done: false }
+        todos: [
+            { id: 1, text: 'A Task 1', status: true },
+            { id: 2, text: 'A Task 2', status: false },
         ]
     },
 
     getters: {
-        mGCompleteTodosA: state => {
-            return state.todosA.filter(todo => todo.done)
+        withSpreadTodos: state => {
+            return state.todos.filter(todo => todo.status)
+        },
+
+        withoutSpreadTodos: state => {
+            return state.todos.filter(todo => !todo.status)
         }
     },
 
     mutations: {
-        mMCreateTodoA (state, todo) {
-            state.todosA.push(todo);
+        createTodo (state, todo) {
+            state.todos.push(todo);
         }
     },
 
     actions: {
-        mACreateTodoA (context) {
+        importTodo (context, status) {
         	
             import('@helpers/todos.json').then(todos => {
                 todos.forEach( todo => {
-                    context.commit('mMCreateTodoA', todo);
+                    if (todo.status === status) {
+                        context.commit('createTodo', todo);
+                    }
                 });
             });
         }
